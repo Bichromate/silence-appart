@@ -341,7 +341,231 @@
             .logo { margin: 0 auto; }
             .article-wrapper { padding: 2rem 5%; }
         }
+    
+        /* --- SOMMAIRE (TABLE OF CONTENTS) --- */
+        .toc-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--accent-color);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .toc-container summary {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toc-container summary::-webkit-details-marker { display: none; }
+
+        .toc-container summary::after {
+            content: "▼";
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            transition: transform 0.2s;
+        }
+
+        .toc-container[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .toc-list {
+            margin: 1rem 0 0 1.2rem;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .toc-list a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* --- ENCARTS PRODUITS / AFFILIATION --- */
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 3px solid #f59e0b;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .product-price {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f59e0b;
+            color: #ffffff !important;
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .product-btn:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+
+        /* --- FAQ ACCORDEONS --- */
+        .faq-section {
+            margin: 3rem 0 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .faq-item summary {
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: "+";
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .faq-item[open] summary::after {
+            content: "−";
+            color: #ef4444;
+        }
+
+        .faq-item p {
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
     </style>
+
+    <!-- DONNÉES STRUCTURÉES (SCHEMA.ORG) : ARTICLE & FAQPAGES -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Bruits de Pas et Chocs au Plafond : Comment Traiter les Nuisances du Voisin du Dessus",
+          "image": "https://silence-appart.fr/images/hero-plafond-bruits-de-pas.webp",
+          "description": "Bruits de Pas et Chocs au Plafond : Comment Traiter les Nuisances du Voisin du Dessus",
+          "author": {
+            "@type": "Organization",
+            "name": "IsoAppart"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "IsoAppart",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://silence-appart.fr/images/hero-appartement-calme.webp"
+            }
+          },
+          "datePublished": "2026-08-17",
+          "dateModified": "2026-08-17"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+                {
+              "@type": "Question",
+              "name": "Pourquoi les bruits de pas sont-ils si difficiles à isoler par le bas ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Les bruits de pas sont des bruits solidiens (d'impact). Ils font vibrer toute la structure du bâtiment (dalle, murs porteurs). Traiter uniquement le plafond atténue le bruit de 50 à 70%."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Faut-il obligatoirement des suspentes anti-vibratiles pour un faux plafond ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui. Des suspentes métalliques directes créent un pont phonique qui retransmet la vibration du plafond au placo. Les cavaliers acoustiques en caoutchouc désolidarisent totalement l'ossature."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
 </head>
 <body>
 
