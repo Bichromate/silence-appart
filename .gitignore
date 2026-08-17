@@ -1,0 +1,13 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Caches et logs
+*.log
+.temp/
+.cache/
+
+# Environnement et clés
+.env
+.env.local

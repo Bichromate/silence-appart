@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JK7BLVQMB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-3JK7BLVQMB");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - IsoAppart</title>
+    <meta name="description" content="Contactez l'équipe IsoAppart pour toute question sur l'isolation phonique en appartement.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="/contact">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --bg-light: #f8f9fa;
+            --text-main: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --radius: 8px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .logo span { color: var(--accent-color); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 500; color: var(--primary-color); }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .page-hero {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .page-hero h1 { font-size: 2rem; }
+        .page-hero p { color: #bdc3c7; margin-top: 0.5rem; }
+
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .contact-card {
+            background-color: var(--bg-light);
+            border: 1px solid #dee2e6;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-card p { margin-bottom: 1rem; color: var(--text-main); font-size: 1.05rem; }
+
+        .contact-email {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.9rem 1.8rem;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .contact-email:hover { background-color: var(--accent-hover); }
+
+        .placeholder {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 0.9rem 1.2rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .footer-links { margin-bottom: 1rem; }
+        .footer-links a { margin: 0 10px; color: #bdc3c7; font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--white); }
+        .copyright { font-size: 0.8rem; color: #7f8c8d; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .logo { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a class='logo' href='/'>Iso<span>Appart</span></a>
+            <ul class="nav-links">
+                <li><a href='/'>Accueil</a></li>
+                <li><a href='/#articles'>Conseils</a></li>
+                <li><a href='/#about'>À Propos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <h1>Contact</h1>
+            <p>Une question, une suggestion d'article, ou un retour sur un produit testé ?</p>
+        </section>
+
+        <div class="contact-wrapper">
+            <a class='back-link' href='/'>&larr; Retour à l'accueil</a>
+
+            <p class="placeholder">⚠️ Cette adresse ne sera active qu'une fois le domaine silence-appart.fr connecté et la redirection email configurée chez OVH.</p>
+
+            <div class="contact-card">
+                <p>Le plus simple pour nous joindre : un email. On répond en général sous 48h.</p>
+                <a class="contact-email" href="mailto:contact@silence-appart.fr">contact@silence-appart.fr</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/mentions-legales">Mentions Légales</a>
+            <a href="/politique-confidentialite">Politique de Confidentialité</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 IsoAppart. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
