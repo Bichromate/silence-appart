@@ -46,6 +46,11 @@
         <priority>0.85</priority>
     </url>
     <url>
+        <loc>https://silence-appart.fr/parquet-ancien-qui-grince-astuces-sans-demonter</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
         <loc>https://silence-appart.fr/machine-a-laver-vibrations-sol-tapis-plots-anti-bruit</loc>
         <changefreq>monthly</changefreq>
         <priority>0.85</priority>
@@ -58,7 +63,7 @@
     <url>
         <loc>https://silence-appart.fr/bruits-de-pas-plafond-voisin-dessus</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
     </url>
     <url>
         <loc>https://silence-appart.fr/double-vitrage-phonique-comparatif</loc>
