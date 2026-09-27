@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JK7BLVQMB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-3JK7BLVQMB");
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1012165011621626"
+     crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur Diagnostic Acoustique : Isolez Votre Appartement en 3 Clics</title>
+    <meta name="description" content="Outil interactif gratuit : identifiez la source de vos nuisances sonores (voix, pas, tuyaux, rue), calculez l'atténuation en dB réalisable et découvrez votre plan d'action personnalisé.">
+    <link rel="canonical" href="/diagnostic-acoustique-appartement">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Simulateur Diagnostic Acoustique : Isolez Votre Appartement en 3 Clics">
+    <meta property="og:description" content="Diagnostic acoustique interactif pour appartement : identifiez vos faiblesses phoniques et calculez votre gain en décibels.">
+    <meta property="og:image" content="https://silence-appart.fr/images/hero-appartement-calme.webp">
+    <meta property="og:url" content="https://silence-appart.fr/diagnostic-acoustique-appartement">
+
+    <!-- DONNÉES STRUCTURÉES WEBAPPLICATION -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Simulateur Diagnostic Acoustique IsoAppart",
+      "url": "https://silence-appart.fr/diagnostic-acoustique-appartement",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Outil d'évaluation acoustique interactif permettant d'estimer l'atténuation sonore et de recommander les solutions techniques adaptées en appartement.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --bg-light: #f8f9fa;
+            --text-main: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --radius: 10px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-weight: 500; color: var(--primary-color); }
+        .nav-links a:hover { color: var(--accent-color); }
+        .nav-tool-btn {
+            background: var(--accent-color);
+            color: #fff !important;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-tool-btn:hover { background: var(--accent-hover); }
+
+        .hero-tool {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('/images/hero-appartement-calme.webp');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 3.5rem 5% 4rem;
+            text-align: center;
+        }
+
+        .hero-tool h1 {
+            font-size: 2.3rem;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            line-height: 1.25;
+        }
+
+        .hero-tool p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            color: #ecf0f1;
+        }
+
+        .simulator-container {
+            max-width: 850px;
+            margin: -2.5rem auto 3rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            padding: 2.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* BARRE DE PROGRESSION */
+        .progress-bar-wrapper {
+            margin-bottom: 2rem;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .progress-line-active {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .step-bubble {
+            position: relative;
+            z-index: 3;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #64748b;
+            transition: 0.3s;
+        }
+        .step-bubble.active {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background: #ebf8ff;
+        }
+        .step-bubble.completed {
+            border-color: var(--success);
+            background: var(--success);
+            color: #fff;
+        }
+
+        /* QUESTIONS ET CARTES DE CHOIX */
+        .step-pane {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .step-pane.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .step-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .choices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .choice-card {
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .choice-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.12);
+        }
+        .choice-card.selected {
+            border-color: var(--accent-color);
+            background: #f0f9ff;
+        }
+        .choice-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .choice-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.35rem;
+            font-size: 1.05rem;
+        }
+        .choice-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* BOUTONS NAVIGATION */
+        .simulator-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-prev, .btn-next, .btn-reset {
+            padding: 0.7rem 1.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .btn-prev {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .btn-prev:hover { background: #e2e8f0; }
+        .btn-next {
+            background: var(--accent-color);
+            color: #fff;
+            margin-left: auto;
+        }
+        .btn-next:hover { background: var(--accent-hover); }
+        .btn-next:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+        .btn-reset {
+            background: #f1f5f9;
+            color: var(--primary-color);
+            margin: 1.5rem auto 0;
+            display: block;
+        }
+        .btn-reset:hover { background: #e2e8f0; }
+
+        /* ÉCRAN DE RÉSULTAT */
+        .result-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+        .result-badge {
+            background: #dcfce7;
+            color: #15803d;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .result-gain {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        .result-gain span {
+            color: var(--accent-color);
+        }
+        .diagnosis-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+        .action-plan {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.25rem 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        .action-plan h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .action-plan ol {
+            padding-left: 1.25rem;
+        }
+        .action-plan li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .cta-result-guide {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-color);
+            color: #fff !important;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+        .cta-result-guide:hover { background: var(--accent-hover); }
+
+        .explanatory-section {
+            max-width: 850px;
+            margin: 3rem auto 4rem;
+            padding: 0 5%;
+        }
+        .explanatory-section h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.4rem;
+        }
+        .explanatory-section p {
+            margin-bottom: 1.2rem;
+            line-height: 1.75;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2.5rem 5%;
+            text-align: center;
+        }
+        .footer-links a { margin: 0 10px; color: #bdc3c7; font-size: 0.9rem; }
+        .footer-links a:hover { color: #fff; }
+        .copyright { margin-top: 1rem; font-size: 0.8rem; color: #7f8c8d; }
+
+        @media (max-width: 768px) {
+            .simulator-container { padding: 1.5rem; margin-top: -1.5rem; }
+            .hero-tool h1 { font-size: 1.7rem; }
+            .nav-links { display: none; }
+            .choices-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Iso<span>Appart</span></a></div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/isolation-phonique-appartement-guide">Guide Ultime</a></li>
+                <li><a href="/diagnostic-acoustique-appartement" class="nav-tool-btn">⚡ Simulateur Diagnostic</a></li>
+                <li><a href="/a-propos">À Propos</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-tool">
+            <h1>Simulateur de Diagnostic Acoustique pour Appartement</h1>
+            <p>Identifiez la source exacte de vos nuisances, calculez l'atténuation en décibels réalisable et découvrez votre plan d'action sur mesure en 3 questions.</p>
+        </section>
+
+        <!-- CONTAINER DU SIMULATEUR INTERACTIF -->
+        <section class="simulator-container">
+            
+            <!-- PROGRESSION -->
+            <div class="progress-bar-wrapper">
+                <div class="progress-steps">
+                    <div class="progress-line-active" id="progressLine"></div>
+                    <div class="step-bubble active" id="bubble1">1</div>
+                    <div class="step-bubble" id="bubble2">2</div>
+                    <div class="step-bubble" id="bubble3">3</div>
+                    <div class="step-bubble" id="bubble4">✓</div>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 1 : NATURE DU BRUIT -->
+            <div class="step-pane active" id="step1">
+                <h2 class="step-title">Étape 1 : Quelle est la nature principale du bruit ?</h2>
+                <p class="step-subtitle">L'acoustique distingue les ondes transmises par l'air de celles qui vibrent dans la structure.</p>
+
+                <div class="choices-grid">
+                    <div class="choice-card" onclick="selectChoice('noise_type', 'aerial', this)">
+                        <div class="choice-icon">🗣️</div>
+                        <div class="choice-label">Bruits Aériens Voisins</div>
+                        <div class="choice-desc">Conversations, télévision, musique ou rires à travers les cloisons ou planchers.</div>
+                    </div>
+
+                    <div class="choice-card" onclick="selectChoice('noise_type', 'impact', this)">
+                        <div class="choice-icon">👣</div>
+                        <div class="choice-label">Bruits d'Impact & Chocs</div>
+                        <div class="choice-desc">Bruits de pas lourds au plafond, talons, chutes d'objets, grincements de plancher.</div>
+                    </div>
+
+                    <div class="choice-card" onclick="selectChoice('noise_type', 'equipment', this)">
+                        <div class="choice-icon">⚙️</div>
+                        <div class="choice-label">Bruits d'Équipements</div>
+                        <div class="choice-desc">Tuyaux ou radiateurs qui claquent, chasse d'eau, soufflerie VMC, machine à laver.</div>
+                    </div>
+
+                    <div class="choice-card" onclick="selectChoice('noise_type', 'exterior', this)">
+                        <div class="choice-icon">🚗</div>
+                        <div class="choice-label">Bruits de Rue & Extérieurs</div>
+                        <div class="choice-desc">Circulation routière, passants, vent sifflant dans les coffres de volets, clim balcon.</div>
+                    </div>
+                </div>
+
+                <div class="simulator-nav">
+                    <button class="btn-next" id="next1" disabled onclick="goToStep(2)">Continuer &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 2 : PAROI OU ÉLÉMENT CRITIQUE -->
+            <div class="step-pane" id="step2">
+                <h2 class="step-title">Étape 2 : Quel élément du logement pose problème ?</h2>
+                <p class="step-subtitle">Sélectionnez la zone de transmission la plus vulnérable de votre pièce.</p>
+
+                <div class="choices-grid" id="step2Choices">
+                    <!-- Généré dynamiquement en JS selon l'étape 1 -->
+                </div>
+
+                <div class="simulator-nav">
+                    <button class="btn-prev" onclick="goToStep(1)">&larr; Retour</button>
+                    <button class="btn-next" id="next2" disabled onclick="goToStep(3)">Continuer &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 3 : CONTRAINTE DE TRAVAUX & STATUT -->
+            <div class="step-pane" id="step3">
+                <h2 class="step-title">Étape 3 : Quel est votre niveau d'intervention ?</h2>
+                <p class="step-subtitle">Nous adaptons nos recommandations pour éviter les travaux destructeurs interdits aux locataires.</p>
+
+                <div class="choices-grid">
+                    <div class="choice-card" onclick="selectChoice('work_type', 'tenant', this)">
+                        <div class="choice-icon">🔑</div>
+                        <div class="choice-label">Locataire (Zéro Travaux)</div>
+                        <div class="choice-desc">Solutions 100 % amovibles, sans perçage lourd, récupérables au déménagement (&lt; 150 €).</div>
+                    </div>
+
+                    <div class="choice-card" onclick="selectChoice('work_type', 'diy_light', this)">
+                        <div class="choice-icon">🔨</div>
+                        <div class="choice-label">Propriétaire / Bricolage Léger</div>
+                        <div class="choice-desc">Pose de doublages minces, joints techniques, calfeutrage, sans gros chantier (150 à 450 €).</div>
+                    </div>
+
+                    <div class="choice-card" onclick="selectChoice('work_type', 'renovation', this)">
+                        <div class="choice-icon">🏗️</div>
+                        <div class="choice-label">Rénovation Acoustique Optimale</div>
+                        <div class="choice-desc">Système complet masse-ressort-masse, ossature désolidarisée, performance maximale.</div>
+                    </div>
+                </div>
+
+                <div class="simulator-nav">
+                    <button class="btn-prev" onclick="goToStep(2)">&larr; Retour</button>
+                    <button class="btn-next" id="next3" disabled onclick="calculateAndShowResult()">Générer mon Diagnostic &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ÉCRAN DE RÉSULTAT DU DIAGNOSTIC -->
+            <div class="step-pane" id="stepResult">
+                <h2 class="step-title">🎯 Votre Diagnostic Acoustique Personnalisé</h2>
+                <p class="step-subtitle">Synthèse basée sur les principes de la physique du bâtiment et les normes d'insonorisation.</p>
+
+                <div class="result-box" id="resultContent">
+                    <!-- Rempli par JavaScript -->
+                </div>
+
+                <button class="btn-reset" onclick="resetSimulator()">🔄 Faire un nouveau diagnostic</button>
+            </div>
+
+        </section>
+
+        <!-- SECTION EXPLICATIVE SUR LA PHYSIQUE DU DIAGNOSTIC -->
+        <section class="explanatory-section">
+            <h2>Comment fonctionne notre algorithme d'évaluation ?</h2>
+            <p>
+                Contrairement aux idées reçues, insonoriser une pièce ne consiste pas à coller des plaques de mousse alvéolée au mur. Le son se propage par ondes mécaniques selon deux lois physiques fondamentales :
+            </p>
+            <p>
+                <strong>1. La Loi de Masse :</strong> Plus une paroi est lourde et dense (béton, placo phonique haute densité, membranes polymères chargées), plus elle résiste à la mise en vibration par les ondes aériennes (gain d'environ 4 à 6 dB par doublement de masse).
+            </p>
+            <p>
+                <strong>2. Le Principe Masse-Ressort-Masse :</strong> Deux parois rigides séparées par un isolant fibreux poreux (laine minérale, feutre résilient) absorbent et dissipent l'énergie acoustique sous forme de chaleur. C'est le principe qui offre le meilleur rapport efficacité/épaisseur en appartement.
+            </p>
+            <p>
+                Ce simulateur croise le type de vibration avec les contraintes d'épaisseur pour vous proposer la solution au meilleur ratio gain acoustique / investissement.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/a-propos">À Propos</a>
+            <a href="/diagnostic-acoustique-appartement">Simulateur Diagnostic</a>
+            <a href="/mentions-legales">Mentions Légales</a>
+            <a href="/politique-confidentialite">Politique de Confidentialité</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 IsoAppart. Tous droits réservés.</p>
+    </footer>
+
+    <!-- LOGIQUE JAVASCRIPT DU SIMULATEUR -->
+    <script>
+        const state = {
+            noise_type: null,
+            target_element: null,
+            work_type: null
+        };
+
+        const subChoices = {
+            aerial: [
+                { id: 'wall', icon: '🧱', label: 'Mur mitoyen sonore', desc: 'Voix du voisin à travers une cloison fine en plâtre ou brique.' },
+                { id: 'door', icon: '🚪', label: 'Porte palière ou intérieure', desc: 'Passage des bruits par l\'interstice bas de porte ou chambranle.' },
+                { id: 'sockets', icon: '🔌', label: 'Prises électriques communicantes', desc: 'Pont phonique direct entre les logements dans les alvéoles.' },
+                { id: 'ceiling_voices', icon: '⬆️', label: 'Plafond (voix / TV du dessus)', desc: 'Transmission directe à travers le plancher haut de la pièce.' }
+            ],
+            impact: [
+                { id: 'ceiling_steps', icon: '👣', label: 'Plafond (Bruits de pas dessus)', desc: 'Chocs de talons et vibrations transmises par la dalle béton.' },
+                { id: 'creaky_floor', icon: '🪵', label: 'Parquet ancien qui grince', desc: 'Frottement bois contre bois ou clous lâches sous les lames.' },
+                { id: 'floor_steps', icon: '⬇️', label: 'Plancher vers le dessous', desc: 'Atténuer ses propres pas pour protéger les voisins du bas.' }
+            ],
+            equipment: [
+                { id: 'radiator', icon: '🔥', label: 'Tuyaux & radiateur qui claquent', desc: 'Bruits de dilatation thermique ou coups de bélier métalliques.' },
+                { id: 'pipe', icon: '🚰', label: 'Évacuation d\'eau / Chasse d\'eau', desc: 'Bruits d\'écoulement liquide dans les colonnes PVC intérieures.' },
+                { id: 'washing_machine', icon: '🧺', label: 'Machine à laver en essorage', desc: 'Vibrations rotatives transmises directement à la dalle du sol.' },
+                { id: 'vmc', icon: '💨', label: 'VMC / Bouche d\'aération', desc: 'Bruit de moteur ou sifflement d\'air continu dans les pièces d\'eau.' }
+            ],
+            exterior: [
+                { id: 'window', icon: '🪟', label: 'Fenêtres anciennes', desc: 'Bruit de trafic routier et sifflements d\'air sur vitrage simple/mince.' },
+                { id: 'shutter', icon: '🪟', label: 'Coffre de volet roulant', desc: 'Caisse de résonance creuse reliant directement l\'appartement à la rue.' },
+                { id: 'ac_balcony', icon: '❄️', label: 'Climatiseur / PAC sur balcon', desc: 'Bourdonnement du compresseur et vibrations sur la dalle extérieure.' }
+            ]
+        };
+
+        const diagnosticDatabase = {
+            'aerial_wall_tenant': {
+                gain: '-5 à -7 dB',
+                perceived: 'Atténuation perçue ~50%',
+                title: 'Bouclier textile & meuble écran pour mur mitoyen',
+                diagnosis: 'En tant que locataire, le perçage lourd est proscrit. Votre solution réside dans l\'absorption de surface et la création d\'une masse mobile.',
+                actions: [
+                    'Positionnez une grande armoire-dressing pleine de vêtements le long du mur mitoyen pour créer un sas absorbant de 60 cm.',
+                    'Installez des panneaux acoustiques en tasseaux de bois sur feutre lourd (fixation par adhésif double-face haute résistance).',
+                    'Éloignez la tête de lit ou votre bureau de 10 cm du mur séparatif.'
+                ],
+                guideUrl: '/isoler-mur-mitoyen-faible-epaisseur-solutions-minces',
+                guideTitle: 'Guide : Isoler un mur mitoyen sans perte de place'
+            },
+            'aerial_wall_diy_light': {
+                gain: '-8 à -11 dB',
+                perceived: 'Atténuation perçue ~65%',
+                title: 'Doublage acoustique mince (3 à 5 cm)',
+                diagnosis: 'Pour un propriétaire cherchant un gain réel sans sacrifier ses mètres carrés, le doublage mince composite est la référence.',
+                actions: [
+                    'Collez un complexe isolant plâtre + feutre résilient (type Calibel ou panneau composite phonique 35 mm).',
+                    'Posez une bande résiliente périphérique au sol et au plafond pour désolidariser le panneau.',
+                    'Jointoyez les angles avec du mastic acoustique élastique.'
+                ],
+                guideUrl: '/isoler-mur-mitoyen-faible-epaisseur-solutions-minces',
+                guideTitle: 'Consulter la méthode pas-à-pas du doublage mince'
+            },
+            'aerial_wall_renovation': {
+                gain: '-14 à -18 dB',
+                perceived: 'Atténuation perçue jusqu\'à -75%',
+                title: 'Système complet Masse-Ressort-Masse sur ossature métallique',
+                diagnosis: 'C\'est la solution royale contre les voix et musiques fortes. La désolidarisation mécanique stoppe totalement la transmission.',
+                actions: [
+                    'Montez une ossature métallique désolidarisée avec bandes résilientes sous les rails R48.',
+                    'Insérez une laine minérale acoustique haute densité de 45 mm dans la cavité.',
+                    'Vissez une double plaque de Placo Phonique croisée avec jointoiement acrylique acoustique.'
+                ],
+                guideUrl: '/isolation-phonique-appartement-guide',
+                guideTitle: 'Consulter le Guide Ultime de l\'isolation phonique'
+            },
+            'aerial_door_tenant': {
+                gain: '-4 à -6 dB',
+                perceived: 'Bruits de couloir divisés par 2',
+                title: 'Kit d\'étanchéité amovible pour porte',
+                diagnosis: 'Le son se comporte comme l\'eau : 80 % des voix passent sous la fente de 1 cm entre le sol et votre porte.',
+                actions: [
+                    'Posez un boudin isolant double face glissant sous la porte.',
+                    'Installez un joint silicone auto-adhésif profil D sur les 3 montants du chambranle.',
+                    'Suspendez un rideau phonique épais occultant devant l\'entrée pour casser l\'écho.'
+                ],
+                guideUrl: '/insonoriser-porte-interieure-creuse-isoplane',
+                guideTitle: 'Guide : Insonoriser une porte intérieure sans la changer'
+            },
+            'aerial_door_diy_light': {
+                gain: '-7 à -10 dB',
+                perceived: 'Atténuation perçue ~60%',
+                title: 'Plinthe automatique à guillotine et alourdissement',
+                diagnosis: 'Une porte creuse isoplane pèse seulement 10 à 12 kg/m². En ajoutant de la masse et une fermeture hermétique au sol, vous coupez net les voix.',
+                actions: [
+                    'Vissez une plinthe automatique suisse escamotable au bas de la porte (le joint s\'abaisse lors de la fermeture).',
+                    'Posez une membrane viscoélastique masse lourde (5 kg/m²) sur la face intérieure de la porte.',
+                    'Recouvrez la membrane d\'un panneau de finition décoratif ou tissu capitonné.'
+                ],
+                guideUrl: '/isoler-porte-entree-tuto',
+                guideTitle: 'Tutoriel complet : Isoler sa porte d\'entrée'
+            },
+            'impact_ceiling_steps_tenant': {
+                gain: '-3 à -5 dB',
+                perceived: 'Masquage et absorption des résonances',
+                title: 'Aménagement absorbant et masquage acoustique',
+                diagnosis: 'Les bruits de pas (solidiennes) se traitent théoriquement chez le voisin du dessus. En location, on vise à briser la caisse de résonance de votre pièce.',
+                actions: [
+                    'Collez des dalles acoustiques adhésives en feutre haute densité aux endroits stratégiques du plafond.',
+                    'Utilisez une machine à bruit blanc intelligente la nuit pour lisser les bruits d\'impact soudains.',
+                    'Décollez impérativement vos meubles et votre lit de 3 cm des murs mitoyens.'
+                ],
+                guideUrl: '/bruits-de-pas-plafond-voisin-dessus',
+                guideTitle: 'Guide : Bruits de pas du voisin du dessus, que faire ?'
+            },
+            'impact_ceiling_steps_diy_light': {
+                gain: '-6 à -9 dB',
+                perceived: 'Atténuation des bruits de chocs directs',
+                title: 'Plafond mince composite sans suspension lourde',
+                diagnosis: 'Si vous ne disposez pas de la hauteur sous plafond nécessaire pour un faux-plafond suspendu de 15 cm, optez pour les panneaux collés composites.',
+                actions: [
+                    'Appliquez des panneaux composites acoustiques plâtre + sous-couche résiliente de 30 mm.',
+                    'Assurez une pose désolidarisée en périphérie avec mastic silicone sans pont rigide.',
+                    'Privilégiez les fixations chimiques ou chevilles avec collerette d\'isolation acoustique.'
+                ],
+                guideUrl: '/isoler-plafond-sans-faux-plafond-solutions-minces',
+                guideTitle: 'Solutions : Isoler son plafond sans faux-plafond'
+            },
+            'equipment_radiator_diy_light': {
+                gain: '-12 à -15 dB',
+                perceived: 'Suppression quasi-totale des claquements',
+                title: 'Colliers isophoniques & purge de dilatation',
+                diagnosis: 'Le claquement métallique provient de la dilatation des tuyaux qui frottent contre des colliers en acier nu ou des traversées de dalle rigides.',
+                actions: [
+                    'Remplacez les colliers métalliques nus par des colliers isophoniques garnis de caoutchouc EPDM.',
+                    'Élargissez légèrement l\'espace autour des tuyaux traversant le plancher et remplissez de mastic silicone souple.',
+                    'Effectuez une purge complète du circuit d\'air du radiateur.'
+                ],
+                guideUrl: '/radiateur-tuyaux-chauffage-qui-claquent-solutions',
+                guideTitle: 'Guide : Radiateurs et tuyaux qui claquent, solutions'
+            },
+            'exterior_shutter_tenant': {
+                gain: '-8 à -12 dB',
+                perceived: 'Suppression des bruits de rue et du vent',
+                title: 'Kit d\'insonorisation pour coffre de volet roulant',
+                diagnosis: 'Le coffre de volet en bois ou PVC mince constitue une caisse de résonance creuse ouvrant directement sur l\'extérieur.',
+                actions: [
+                    'Ouvrez la trappe de visite et nettoyez l\'intérieur du coffre.',
+                    'Insérez une mousse acoustique semi-rigide profilée épousant la trajectoire du tablier enroulé.',
+                    'Posez un joint brosse anti-vent à la fente de sortie et étanchéifiez les contours avec un mastic acrylique.'
+                ],
+                guideUrl: '/insonoriser-coffre-volet-roulant-bruit-rue',
+                guideTitle: 'Tuto : Insonoriser un coffre de volet roulant'
+            }
+        };
+
+        function selectChoice(stepKey, value, element) {
+            state[stepKey] = value;
+            const parent = element.parentElement;
+            parent.querySelectorAll('.choice-card').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            if (stepKey === 'noise_type') {
+                document.getElementById('next1').disabled = false;
+                populateStep2(value);
+            } else if (stepKey === 'target_element') {
+                document.getElementById('next2').disabled = false;
+            } else if (stepKey === 'work_type') {
+                document.getElementById('next3').disabled = false;
+            }
+        }
+
+        function populateStep2(noiseType) {
+            const container = document.getElementById('step2Choices');
+            container.innerHTML = '';
+            state.target_element = null;
+            document.getElementById('next2').disabled = true;
+
+            const items = subChoices[noiseType] || subChoices['aerial'];
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'choice-card';
+                card.onclick = () => selectChoice('target_element', item.id, card);
+                card.innerHTML = `
+                    <div class="choice-icon">${item.icon}</div>
+                    <div class="choice-label">${item.label}</div>
+                    <div class="choice-desc">${item.desc}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function goToStep(stepNumber) {
+            document.querySelectorAll('.step-pane').forEach(p => p.classList.remove('active'));
+            document.getElementById('step' + stepNumber).classList.add('active');
+
+            // Mise à jour de la barre de progression
+            const bubbles = [document.getElementById('bubble1'), document.getElementById('bubble2'), document.getElementById('bubble3'), document.getElementById('bubble4')];
+            bubbles.forEach((b, idx) => {
+                b.classList.remove('active', 'completed');
+                if (idx + 1 < stepNumber) b.classList.add('completed');
+                if (idx + 1 === stepNumber) b.classList.add('active');
+            });
+
+            const percent = ((stepNumber - 1) / 3) * 100;
+            document.getElementById('progressLine').style.width = percent + '%';
+        }
+
+        function calculateAndShowResult() {
+            const key = `${state.noise_type}_${state.target_element}_${state.work_type}`;
+            let res = diagnosticDatabase[key];
+
+            // Repli intelligent si combinaison non codée spécifiquement
+            if (!res) {
+                res = {
+                    gain: '-6 à -10 dB',
+                    perceived: 'Atténuation sensible ~50 à 60%',
+                    title: 'Traitement acoustique combiné : Étanchéité & Amortissement',
+                    diagnosis: 'Cette configuration implique des transmissions latérales mixtes. La règle fondamentale consiste à bloquer les fuites d\'air puis à désolidariser les surfaces de contact.',
+                    actions: [
+                        'Scellez en priorité les interstices et fissures périphériques au mastic acrylique acoustique.',
+                        'Posez un matériau lourd résilient (membrane amortissante ou panneau composite mince).',
+                        'Installez des textiles lourds (tapis à sous-couche ou rideaux phoniques) pour casser la réverbération de la pièce.'
+                    ],
+                    guideUrl: '/isolation-phonique-appartement-guide',
+                    guideTitle: 'Consulter notre Guide d\'isolation phonique'
+                };
+            }
+
+            const html = `
+                <div class="result-header">
+                    <div>
+                        <span class="result-badge">Diagnostic Validé</span>
+                        <h3 style="margin-top:0.5rem; font-size:1.35rem; color:var(--primary-color);">${res.title}</h3>
+                    </div>
+                    <div class="result-gain">Gain estimé : <span>${res.gain}</span><br><small style="font-size:0.85rem; font-weight:400; color:#64748b;">${res.perceived}</small></div>
+                </div>
+                <p class="diagnosis-text">${res.diagnosis}</p>
+                <div class="action-plan">
+                    <h4>🛠️ Votre Plan d'Action Recommandé :</h4>
+                    <ol>
+                        ${res.actions.map(act => `<li>${act}</li>`).join('')}
+                    </ol>
+                </div>
+                <div style="text-align:center; margin-top:2rem;">
+                    <a href="${res.guideUrl}" class="cta-result-guide">${res.guideTitle} &rarr;</a>
+                </div>
+            `;
+
+            document.getElementById('resultContent').innerHTML = html;
+            goToStep('Result');
+
+            // Marquer l'étape finale complétée
+            document.getElementById('bubble4').classList.add('completed');
+            document.getElementById('progressLine').style.width = '100%';
+        }
+
+        function resetSimulator() {
+            state.noise_type = null;
+            state.target_element = null;
+            state.work_type = null;
+            document.querySelectorAll('.choice-card').forEach(el => el.classList.remove('selected'));
+            document.getElementById('next1').disabled = true;
+            document.getElementById('next2').disabled = true;
+            document.getElementById('next3').disabled = true;
+            goToStep(1);
+        }
+    </script>
+
+</body>
+</html>
