@@ -265,6 +265,62 @@
             .nav-links { display: none; } /* Pour simplifier. En prod, ajouter un menu burger */
             .logo { margin: 0 auto; }
         }
+    
+        /* --- FILTRES DE CATÉGORIES --- */
+        .category-filter-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin: 0 auto 2.5rem;
+            max-width: 950px;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            color: #4a5568;
+            padding: 0.55rem 1.15rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.25);
+        }
+
+        .filter-badge {
+            background: rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .filter-btn.active .filter-badge {
+            background: rgba(255,255,255,0.25);
+            color: #ffffff;
+        }
+
+        .article-card.hidden {
+            display: none !important;
+        }
+
     </style>
 </head>
 <body>
@@ -309,7 +365,7 @@
                 <h2 class="section-title">Nos guides d'isolation</h2>
 
                 <div class="articles-grid">
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/card-mur-mitoyen-mousse-acoustique.webp" alt="Panneau de mousse acoustique en gros plan sur un mur mitoyen" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isoler un mur mitoyen : la technique de la "boîte dans la boîte"</h3>
@@ -318,7 +374,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-placo-phonique-comparatif.webp" alt="Plaque de Placo Phonique bleu sur ossature métallique avec laine minérale" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Placo Phonique (Bleu) vs Standard : prix, pose et gain en dB</h3>
@@ -327,7 +383,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-isolation-mur-mince.webp" alt="Doublage acoustique mince sur mur mitoyen en appartement" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isoler un mur mitoyen sans perdre de place (Solutions 3 à 5 cm)</h3>
@@ -336,7 +392,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-cloison-alveolaire-acoustique.webp" alt="Renforcement phonique d'une cloison alvéolaire avec placo phonique et laine minérale" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Cloison alvéolaire (Placoplan) : comment l'isoler efficacement</h3>
@@ -345,7 +401,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-prises-electriques-acoustiques.webp" alt="Boîte d'encastrement électrique acoustique et étanche à l'air sur cloison" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Prises électriques et bruit des voisins : les boîtes acoustiques</h3>
@@ -354,7 +410,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/card-plafond-bruits-impact.webp" alt="Salon avec plafond apparent, illustrant les bruits de pas venant de l'étage du dessus" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Bruits de pas et chocs : comment traiter votre plafond ?</h3>
@@ -363,7 +419,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/hero-isoler-plafond-mince.webp" alt="Panneaux acoustiques minces collés au plafond sans faux plafond" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isoler son plafond sans faux-plafond (Solutions minces 2 à 5 cm)</h3>
@@ -372,7 +428,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/card-vitrage-phonique.webp" alt="Fenêtre à double vitrage dans un appartement, lumière chaude en soirée" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Double vitrage phonique vs classique : le comparatif</h3>
@@ -381,7 +437,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/hero-fenetre-ancienne.webp" alt="Fenêtre ancienne en bois avec joint d'isolation acoustique" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isolation phonique fenêtre ancienne : 5 astuces sans changer de vitrage</h3>
@@ -390,7 +446,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/hero-coffre-volet-roulant-acoustique.webp" alt="Isolation acoustique d'un coffre de volet roulant intérieur" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Insonoriser un coffre de volet roulant : stopper les bruits de rue</h3>
@@ -399,7 +455,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-clim-pompe-chaleur-balcon.webp" alt="Caisson acoustique en bois pour climatiseur extérieur sur balcon d'appartement" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Caisson anti-bruit climatiseur & pompe à chaleur sur balcon</h3>
@@ -408,7 +464,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/hero-porte-entree.webp" alt="Porte d'entrée bleue d'appartement avec judas et poignée" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isoler sa porte d'entrée pour moins de 50€ (Tuto)</h3>
@@ -417,7 +473,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/hero-porte-interieure-acoustique.webp" alt="Porte intérieure en bois avec joint d'étanchéité et plinthe automatique" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Insonoriser une porte intérieure creuse (Isoplane) sans la changer</h3>
@@ -426,7 +482,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="portes-fenetres">
                         <img src="/images/hero-rideaux-anti-bruit.webp" alt="Rideaux épais devant une baie vitrée dans un salon" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Rideaux anti-bruit : Efficacité réelle ou effet placebo ?</h3>
@@ -435,7 +491,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/hero-sol-plancher.webp" alt="Intérieur d'appartement avec parquet en bois clair" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Isoler son sol pour ne plus déranger le voisin du dessous</h3>
@@ -444,7 +500,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/hero-parquet-ancien-grincement.webp" alt="Parquet ancien en point de Hongrie dans appartement" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Parquet ancien qui grince : 5 astuces simples sans tout démonter</h3>
@@ -453,7 +509,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-machine-a-laver-anti-vibration.webp" alt="Machine à laver avec plots anti-vibrations en caoutchouc sur carrelage" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Machine à laver qui fait trembler le sol : tapis et plots anti-bruit</h3>
@@ -462,7 +518,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-tuyau-evacuation-acoustique.webp" alt="Tuyau d'évacuation avec manchon acoustique et colliers isophoniques" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Insonoriser une colonne d'évacuation d'eau (Bruits de chasse d'eau)</h3>
@@ -471,7 +527,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-radiateur-chauffage-qui-claque.webp" alt="Radiateur et tuyaux de chauffage avec colliers isophoniques" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Tuyaux de chauffage et radiateurs qui claquent : solutions</h3>
@@ -480,7 +536,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-vmc-bruyante-appartement.webp" alt="Bouche d'extraction VMC acoustique dans salle de bain" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>VMC bruyante en appartement : solutions sifflement & moteur</h3>
@@ -489,7 +545,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-mousse-panneaux.webp" alt="Gros plan sur de la mousse acoustique pyramidale" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Mousse acoustique vs panneaux acoustiques : lequel choisir ?</h3>
@@ -498,7 +554,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="equipements">
                         <img src="/images/hero-bruit-blanc.webp" alt="Table de chevet avec lampe et livres dans une chambre" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Bruit blanc : les meilleures machines pour couvrir le bruit</h3>
@@ -507,7 +563,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/hero-tapis-anti-bruit.webp" alt="Gros plan sur la texture d'un tapis épais beige" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Tapis anti-bruit : est-ce que ça marche pour les voisins du dessous ?</h3>
@@ -516,7 +572,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="murs">
                         <img src="/images/hero-mesurer-nuisances-sonores-sonometre.webp" alt="Mesure de décibels avec un sonomètre dans un appartement" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Mesurer et prouver les nuisances sonores : sonomètre & recours</h3>
@@ -525,7 +581,7 @@
                         </div>
                     </article>
 
-                    <article class="article-card">
+                    <article class="article-card" data-category="plafonds-sols">
                         <img src="/images/hero-chambre-silencieuse-sommeil.webp" alt="Chambre à coucher calme et insonorisée avec tête de lit capitonnée" width="400" height="250" loading="lazy" class="article-image">
                         <div class="article-content">
                             <h3>Aménager une chambre silencieuse : lit, tête de lit & sommeil</h3>
@@ -563,5 +619,26 @@
         <p class="copyright">&copy; 2026 IsoAppart. Tous droits réservés.</p>
     </footer>
 
-    </body>
+    
+    <!-- SCRIPT DE FILTRAGE INSTANTANÉ DES GUIDES -->
+    <script>
+        function filterCategory(category, button) {
+            // Mise à jour de l'état actif des boutons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Filtrage des cartes d'articles
+            const cards = document.querySelectorAll('.article-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
+</body>
 </html>
